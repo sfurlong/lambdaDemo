@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple hello world REST API
+Outputs:
+  endpoint:
+    Description: The API Gateway endpoint for invoking the API
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com
+Resources:
+  HelloWorldApi:
+    Properties:
+      CodeUri: s3://sfurlong-bucket/53c1a3bd960848273cb458cf68f9af71
+      Events:
+        Endpoint:
+          Properties:
+            Method: get
+            Path: /helloworld
+          Type: Api
+      Handler: handler.handler
+      Runtime: nodejs6.10
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
